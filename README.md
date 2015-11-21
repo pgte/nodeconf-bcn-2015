@@ -116,12 +116,40 @@ chrome devtool - cpu profiles
 build your own dashboard using these tools`
 do load testing and measure/profile
 
+# the magic dump - luca maraschi 
 
+* coredumps - process snapshots
+* post-mortems wg, tracing wg
 
+indutny/llnode
+lldb - debugger
+bryan cantrill - production is war
 
+story of a debugging session
 
+prod outage: elb trashing machine - nothing to look at, debug
+stack: ec2 running nginx, node
 
+'core a process'
+take a dump on linux, take it to smartos - to dtrace and mdb
 
+restify + bunyan - implements dtrace probes
+
+prstat -c -x $(pgrep -o -x node)
+
+bunyan -p PID # enable logging without restart - smartos only?
+
+joyent/nhttpsnoop
+
+node flag: --abort on uncaught exception, dumps as well
+
+pmap -x
+gcore 
+
+mdb findleaks - if you're lucky
+findObjects, findFunctions, jsscope
+
+typo - causing handler referencing itself
 
 
 
