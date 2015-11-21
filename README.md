@@ -151,10 +151,20 @@ findObjects, findFunctions, jsscope
 
 typo - causing handler referencing itself
 
+# middleware evolution - eugene 
 
+polls, people love promises
+and restify
 
+middleware - series of functions connected together like unix pipes
 
+implement this: 
+callbacks, generators, async-await
 
+callbacks - hell,
+generators - not intuitive (poll: what?!)
+co - turn generators to promises
+async-await - only with babel of course, people like async await
 
 
 
