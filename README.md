@@ -103,11 +103,18 @@ complex leak - closure holding onto whole context, even unused vars
 v8-profiler
 
 heap snaphost, chrome devtool compare heap snapshots
+profiler snapshot
+cpu
 
+main thread -> event loop -> thread pool
+flamegraphs
+profiles.startProfiling
+chrome devtool - cpu profiles
 
+`NODE_ENV` defaults to development
 
-
-
+build your own dashboard using these tools`
+do load testing and measure/profile
 
 
 
