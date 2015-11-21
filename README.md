@@ -1,84 +1,86 @@
-# v8 under the hood - Franziska Hinkelman
+# V8 under the hood - Franziska Hinkelman
 
 ## JS engines everywhere
-* firefox monkeys, spider, trace, odin-monkey
-misoft - chakra
-apple - JavascriptCore
-oracle nashorn (ex-rhino)
-google v8
+
+* mozilla - Spidermonkey
+* microsoft - Chakra
+* apple - JavascriptCore
+* oracle - Nashorn (ex-Rhino)
+* google - V8
 
 ## and they're fast
-some sunspider benchmarks - js engines getting faster
-c++ vs js - js not that much slower than optimized c++ code
-d8 headless node, v8 debug
+
+* see sunspider benchmarks - getting ever faster
+* JS not that much slower than optimized c++ code (and faster than unoptimized)
 
 ## compilers
-lexer,parser,translator then compilers
-AOT (ahead of time) vs JIT (just in time)
-hidden classes - e.g for functions 
-same hidden class - same machine code
-`d8 --allow-natives-syntax` then #HaveSameMap(a,b)
-inline caches - same hidden class, property at same offset
 
-JIT and optimized JIT - spend a bit more time optimizing hot functions
-optimized JIT might have to fallback if not specific case
-optimized compiler: crankshaft and turbofan
-d8 --trace-opt
+* lex -> parse -> translate -> compile
+* AOT (ahead of time, e.g C++) vs JIT (just in time, JS)
 
-but monomorphic vs polymorphic is just one optimization
-dead-code-optimization
+## V8
 
-avoid try-catch, for-in, leaking vars, with
-premature opt warnings all over the place!
-v8 loves classes and monomorphic functions
+* V8 uses two compilers: a quick JIT and optimizing JIT compiler
+* hot functions are identified then passed to the optimizing compiler
+* optimizing compiler spends a bit more but does more optimizations
+* V8 optimizing compilers:
+    * 2011 CrankShaft
+    * 2015 TurboFan - work in progress
+* `d8` - debug V8
+* `d8 --trace-opt` - tracing optimizations
 
-# lessons learned high traffic express webapp - patrick hund 
-mobile.de 300 req/sec
-from Java, breaking the monolith
-lessons learnt:
-* run in prod as early as possible
-> gatling, kibana, grafana
-* write testable code
-* code reviews are silver pairing is gold
-> pairing is harder but pays off
-> joy of switching to node
-* keep it simple
+## optimizations
 
-# ipfs - david dias
-distributed first - better web applications
-node is one of the best places of innvoation
-web relies on connection to the backbone
-loosing connection, ddos
+* V8 creteas hidden classes to re-use already compiled machine
+* `d8 --allow-natives-syntax` - `#HaveSameMap(a,b) === true` if same hidden class
+* inline caches - for property access: same hidden class, property at same memory offset
+* dead code elimination
+* V8 loves constructors and monomorphic functions (same number+type arguments)
+* avoid try-catch, for-in, leaking vars, with, eval (seriously?)
+* optimize with caution, clearer code first
 
-location addressing vs content addressing
-sharing photo - presenter to audience
-or video - 200MB - 8 hops, 30 clients, 48GB 
-> ? surely networking stack optimizes something?
-responsible network usage
-more datacenter cables put data closer to user 
-internet connection speeds still increasing faster than bndwith requirements
-slow connections, TLS handshake timeout
-third world countries
-offline collaboration 
-low bwith, interference, congestion, 
-web out of IoT as wasn't designed for offline - service workers?
+# Lessons learned from building high traffic web-app  - Patrick Hund
+* mobile.de 300 req/sec
+* moving away from Java, breaking the monolith
+* importance load testing, good monitoring (gatling, grafana)
+* the joy of working with node for devs
+* lessons learnt:
+    * run in prod as early as possible
+    * write testable code
+    * code reviews are silver pairing is gold (harder but pays off)
+    * keep it simple
 
+# IPFS - David Dias
 
-apps with no origin
-leverage network cache
-resilient to network partitions/splits
+* node is one of the best places of innovation - community, etc
 
-internet - comes from intergalactic network
+## problems
 
-distributed - merkle - permanent web
+* web relies on connection to the backbone
+* loosing connection, ddos
+* location addressing (instead of content addressing)
+* irresponsible bandwith usage:  sharing 200MB video - 8 hops, 30 clients, 48GB - ? surely networking stack optimizes something
+* we're building more datacenter cables put data closer to user
+* internet connection speeds still increasing faster than bndwith requirements but for how long?
+* on slow connections inaccesible https sites: TLS handshake timeout
+* third world countries
+* offline collaboration in the same room?
 
-merkledag - kinks between blobs, beginning of each blob the hash of the previous one
+## goals?
 
-> aliens sad, want to use net, money grows on trees bitcoin
+* apps with no origin
+* leveraging network cache
+* resilient to network partitions/splits
+* internet - comes from intergalactic network, right?
 
-DHT - holy grail of p2p 
+## solution
 
-serve data to everywhere?  - serve data from everywhere
+distributed|merkle|permanent web
+
+* merkledag - link of blobs, each blob starts with the hash of the previous one
+* DHT - holy grail of p2p - discovery of peers, content locations
+
+## serve data to everywhere?  - serve data from everywhere
 
 # hunting performance problems - daniel khan
 
@@ -86,7 +88,7 @@ bad press - usually around perf
 netflix node in flames, walmart memory leak
 startup noone knows vs featured on TC
 
-what's node? v8, libuv, std library... 
+what's node? V8, libuv, std library...
 
 node memory model - resident set size = heap + stack + code
 process.memoryUsage()
@@ -116,7 +118,7 @@ chrome devtool - cpu profiles
 build your own dashboard using these tools`
 do load testing and measure/profile
 
-# the magic dump - luca maraschi 
+# the magic dump - luca maraschi
 
 * coredumps - process snapshots
 * post-mortems wg, tracing wg
@@ -144,28 +146,24 @@ joyent/nhttpsnoop
 node flag: --abort on uncaught exception, dumps as well
 
 pmap -x
-gcore 
+gcore
 
 mdb findleaks - if you're lucky
-findObjects, findFunctions, jsscope
+findObjects, findFunctions, JSscope
 
 typo - causing handler referencing itself
 
-# middleware evolution - eugene 
+# middleware evolution - eugene
 
 polls, people love promises
 and restify
 
 middleware - series of functions connected together like unix pipes
 
-implement this: 
+implement this:
 callbacks, generators, async-await
 
 callbacks - hell,
 generators - not intuitive (poll: what?!)
 co - turn generators to promises
 async-await - only with babel of course, people like async await
-
-
-
-
