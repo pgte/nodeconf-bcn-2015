@@ -155,100 +155,90 @@ distributed|merkle|permanent web
     * only with babel of course
     * poll people like it
 
-# robots - julien cheal
+# robots - Julian Cheal
 
-cylons.js
-johnnyfive
-gobot - in go
+* libraries: cylons.js johnnyfive or gobot (for go)
+* hello world - blinking led
+* devices:
+    * RGB LED
+    * RGB LED strip
+    * arduino
+    * digispark
+    * raspi
+    * photon
+    * an iBeacon
+    * parrot drone
 
-hello world - blinking led
-or RGB LED or and RGB LED strip
+# Becoming a better node dev - Igor Soarez
 
-arduino, firmata
-digispark
-raspi
-photon
-ibeacon
-parrot 
+## motivation
+* short term: necessity, fun
+* grow fond of it, bet on the long run
 
-# solid node dev - igor soarez
+## attitude
 
-how to become a better node dev
+## mentality
+* simplicty, YAGNI, no IDEs, no boilerplate, no code generation, etc
+* reminds me easy vs simple
 
-motivation: necessity, fun
-don't just think about short term: attitude, grow fond of it, bet on the long run
+## learning
+* turbo mode: short feedback loop
+* invest in tools but don't overoptimize
 
-mentality:
-simplicty, YAGNI, no bilerplate, node codegeneration, etc
-easy vs simple 
+## great node skills
+* basic js
+* network protocols
+* T-shaped
 
-turbo learning: short feedback loop
-invest in tools but not tto much
+## levels
 
-great node skill:
-js
-network protocols
-T-shaped
+* capable: modules, troubelshooting, debugging, no cb hell, use streams
+* efficient: advanced flow control, understand event loop, IO throttling, work queues, custom streams
+* pro: understand libuv, v8, custom TCP protocols, README driven development, small modules, README-tests-code
 
-from capable:
-modules, troublshoot, debug, no cb hell, using streams 
+## community
+* standards, conventions
+* contributing to open source
+* publish your code early
+* teach
 
-efficient:
-advanced flow control, understand event loop, 
-IO throttling, work queues, custom streams
+## pairing
 
-to pro:
-understand libuv, v8, custom TCP protocols,
-README driven development, small modules, README-tests-code
-protocols, 
+# Greenkeeper demon - Stephan Bönnemann
 
-standards, conventions, contributing to open sources
-publish your code early 
+* automatic break-detection for non-semver respecting deps`
+* NODECONFBCN free for a month for private repos
 
-participate in the communtity
-teach
+# rapid idea devalidation - David Gruebl
 
-pairing
+* we are 'that friend' - to implement that starup idea
+* a startup is a bet on an idea, validate ASAP
 
-# boennemann - greenkeeper demo
+# coding education should be free - Michelle and Claire
 
-automatic break-detection for non-semver respecting deps`
+* community is everything
+* online resources are cool but community learning better
+* skill shortage but learning to code is $$$
+* diversity is better for the industry
 
-NODECONFBCN free for a month for private repos
+## nodegirls_LDN
 
-# david gruebl - the next big thing
+## online resources
 
-we are 'that friend'
-startuo is a bet on an idea
-rapid idea devalidation
+* nodeschool, freecodecamp
+* hard to stay motivated alone
 
-# coding education should be free - michelle and claire
+## founders and coders
+* 8 weeks of group learning with volunteer teachers
 
-founders and coders
-nodegirls_LDN
-
-community is everything, 
-online resources but community learning
-
-skill shortage but learning to code is $$$
-
-diversity
-
-online courses vs stayin motivated
-founders and coders trying to solve that - 8 weeks of group learning
-
-how is it free? -> volunteer teachers
-
-nodeschool, freecodecamp
-
-critics
+## critics
 * free !== bad
 * resentment towards newcomers
-* you can't learn everything in a day, but introduction is possible 
+* you can't learn everything in a day, but introduction is possible
 
-mentor, start new event, contribute, be cool 
+## mentor, start new event, contribute, be cool
 
-# async microservices with node - bruno pedro 
+# async microservices with node - Bruno Pedro
 
 organize service around business capabilites
 designed for failure
@@ -269,7 +259,7 @@ can even consume via webhook (is that in rabbit?)
 
 amqplib
 
-patterns: 
+patterns:
 work queue, pubsub, webhook, routing, backpressure, RPC (noo)
 
 # networking for node programmers - aria stewart
@@ -304,7 +294,7 @@ id getting packets accross the network, just by reading a few bytes of the beggi
 
 DNS:
 
-layer 4: TCP 
+layer 4: TCP
 
 connection 2 IPs 2 ports
 source port usually chisen randomly
@@ -322,13 +312,10 @@ unevenly distirbuted future, 2G home common
 network scale limits, no more ipv4 addresses
 ISP doing NAT, same IP fro lots of customers
 
-network disintermediation 
+network disintermediation
 hybrid partly p2p - centralized
 
 webrtc - p2p
 scuttlebutt, torrent experiment
 
 old mistakes: circuitswitch vs packet
-
-
-
