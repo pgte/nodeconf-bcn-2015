@@ -240,82 +240,78 @@ distributed|merkle|permanent web
 
 # async microservices with node - Bruno Pedro
 
-organize service around business capabilites
-designed for failure
-decentralised governance
-loosely coupled, limited responsibility
+## microservices
+* organize service around business capabilities
+* designed for resilience and decentralized ownership and deployment
+* loosely coupled, limited responsibility
 
-connected through common interface, usually HTTP
-synchronous requires more orchestration
-have to handle failures, latenc
+* connected through common interface, usually HTTP
+* can also use a broker to decouple even more and simplify
 
-async calls 1-1: complex
+## AMQP
+* advanced pub-sub, transactional
+* publish: fire-and-forget, or confirmed
+* configurable routing and subscribe
+* can even consume via web-hook (rabbit plugin)
 
-using a broker
-AMQP: advanced pub-sub, transactional
-publish: fire-and-forget, or confirmed
-configurable routing and subscribe
-can even consume via webhook (is that in rabbit?)
+## amqplib
 
-amqplib
+## patterns
+work queue, pubsub, webhook, routing, backpressure, RPC
 
-patterns:
-work queue, pubsub, webhook, routing, backpressure, RPC (noo)
+# networking for node programmers - Aria Stewart
 
-# networking for node programmers - aria stewart
+* brief history on the begginings of networking
 
-unix history, beggining of networking, mainframes, terminals
-E1 trunk - 50 something 64 KB channels
-leased line, wide area network, ATM over DSL
+## Ethernet
+* 1980s local networks converged to Ethernet
+* OSI model, layer 2 ethernet (layer 3 ip)
 
-1980s local networks, token ring etc, converged to Ethernet
+## ARP
+* layer 2-3 link - Ethernet - IP
+* who has this ip? then caches
+* if not local IP to talk to then gateway
 
-OSI model, layer 2 ethernet, layer 3 ip
+## IP
+* address for a single interface
+* getting packets across networks, just reading a few bytes of the beginning of packet
+* 4 bytes, network part, host id, A, B, C, D, etc class, /16 /24
+* e.g. /24 network: 5.6.7 host: .1
+* local network - usually not too many routes
+* on the internet: broad routes to send traffic to EU, US, etc
 
-layer 2 -3 link, Ethernet ARP, who has this ip to talk to, then caches
-if not local IP to talk to then gateway
+## IPv6
+* starting to happen
+* 128 bit, 64 bit for host and network, each
+* routing bit more complex though
 
-layer 3 IP
-address for a single interface
-4 bytes, network part, host id, A, B, C, D, etc class, /16 /24
-/24 network: 5.6.7 host: .1
+## traceroute
+* e.g. `traceroute -an 24.75.24.253`
+* backbone routers don't always increment hop count
+* also don't always advertise who they are
 
-local not too many routes
-on the internet, millions of routeo
-broad routes to send traffic to EU, US, etc
+## DNS
 
-starting to use ipv6, 128 bit, 64 bit for host and network, each
-routing more complex though
+## TCP
+* connection is defined by 2 IPs, 2 ports
+* source port usually chosen randomly
+* each conn tracks how much buffer space left to send
+* drop packets are rarer these dates, but delayed is common
+* TCP connection setup kind of slow
 
-traceroute -an 24.75.24.253
-backbone routers don't always incr hop, also don't always advertise
+## new constraints: mobile phones
+* high bandwidth but delay
 
-id getting packets accross the network, just by reading a few bytes of the beggining of the paacket
+## convergence
+* IPv6 starting to happen
 
-DNS:
+## unevenly distributed future
+* e.g. 2G connection speeds common in India
 
-layer 4: TCP
+## network scale limits
+* no more ipv4 addresses
+* ISP doing NAT, same IP for lots of customers
 
-connection 2 IPs 2 ports
-source port usually chisen randomly
-each conn tracks how much bufferspace left to send
-drop packets are rarer these dates, but delayed can still happen
-
-TCP starts kind of slow
-
-new constraints: mobile phones
-high bandwith but delay
-convergence ip6 starting to happen
-
-unevenly distirbuted future, 2G home common
-
-network scale limits, no more ipv4 addresses
-ISP doing NAT, same IP fro lots of customers
-
-network disintermediation
-hybrid partly p2p - centralized
-
-webrtc - p2p
-scuttlebutt, torrent experiment
-
-old mistakes: circuitswitch vs packet
+# network disintermediation
+* hybrid p2p - centralized
+* webRTC, scuttlebutt, torrent experiments
