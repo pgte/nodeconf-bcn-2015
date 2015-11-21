@@ -154,3 +154,181 @@ distributed|merkle|permanent web
     * return promise
     * only with babel of course
     * poll people like it
+
+# robots - julien cheal
+
+cylons.js
+johnnyfive
+gobot - in go
+
+hello world - blinking led
+or RGB LED or and RGB LED strip
+
+arduino, firmata
+digispark
+raspi
+photon
+ibeacon
+parrot 
+
+# solid node dev - igor soarez
+
+how to become a better node dev
+
+motivation: necessity, fun
+don't just think about short term: attitude, grow fond of it, bet on the long run
+
+mentality:
+simplicty, YAGNI, no bilerplate, node codegeneration, etc
+easy vs simple 
+
+turbo learning: short feedback loop
+invest in tools but not tto much
+
+great node skill:
+js
+network protocols
+T-shaped
+
+from capable:
+modules, troublshoot, debug, no cb hell, using streams 
+
+efficient:
+advanced flow control, understand event loop, 
+IO throttling, work queues, custom streams
+
+to pro:
+understand libuv, v8, custom TCP protocols,
+README driven development, small modules, README-tests-code
+protocols, 
+
+standards, conventions, contributing to open sources
+publish your code early 
+
+participate in the communtity
+teach
+
+pairing
+
+# boennemann - greenkeeper demo
+
+automatic break-detection for non-semver respecting deps`
+
+NODECONFBCN free for a month for private repos
+
+# david gruebl - the next big thing
+
+we are 'that friend'
+startuo is a bet on an idea
+rapid idea devalidation
+
+# coding education should be free - michelle and claire
+
+founders and coders
+nodegirls_LDN
+
+community is everything, 
+online resources but community learning
+
+skill shortage but learning to code is $$$
+
+diversity
+
+online courses vs stayin motivated
+founders and coders trying to solve that - 8 weeks of group learning
+
+how is it free? -> volunteer teachers
+
+nodeschool, freecodecamp
+
+critics
+* free !== bad
+* resentment towards newcomers
+* you can't learn everything in a day, but introduction is possible 
+
+mentor, start new event, contribute, be cool 
+
+# async microservices with node - bruno pedro 
+
+organize service around business capabilites
+designed for failure
+decentralised governance
+loosely coupled, limited responsibility
+
+connected through common interface, usually HTTP
+synchronous requires more orchestration
+have to handle failures, latenc
+
+async calls 1-1: complex
+
+using a broker
+AMQP: advanced pub-sub, transactional
+publish: fire-and-forget, or confirmed
+configurable routing and subscribe
+can even consume via webhook (is that in rabbit?)
+
+amqplib
+
+patterns: 
+work queue, pubsub, webhook, routing, backpressure, RPC (noo)
+
+# networking for node programmers - aria stewart
+
+unix history, beggining of networking, mainframes, terminals
+E1 trunk - 50 something 64 KB channels
+leased line, wide area network, ATM over DSL
+
+1980s local networks, token ring etc, converged to Ethernet
+
+OSI model, layer 2 ethernet, layer 3 ip
+
+layer 2 -3 link, Ethernet ARP, who has this ip to talk to, then caches
+if not local IP to talk to then gateway
+
+layer 3 IP
+address for a single interface
+4 bytes, network part, host id, A, B, C, D, etc class, /16 /24
+/24 network: 5.6.7 host: .1
+
+local not too many routes
+on the internet, millions of routeo
+broad routes to send traffic to EU, US, etc
+
+starting to use ipv6, 128 bit, 64 bit for host and network, each
+routing more complex though
+
+traceroute -an 24.75.24.253
+backbone routers don't always incr hop, also don't always advertise
+
+id getting packets accross the network, just by reading a few bytes of the beggining of the paacket
+
+DNS:
+
+layer 4: TCP 
+
+connection 2 IPs 2 ports
+source port usually chisen randomly
+each conn tracks how much bufferspace left to send
+drop packets are rarer these dates, but delayed can still happen
+
+TCP starts kind of slow
+
+new constraints: mobile phones
+high bandwith but delay
+convergence ip6 starting to happen
+
+unevenly distirbuted future, 2G home common
+
+network scale limits, no more ipv4 addresses
+ISP doing NAT, same IP fro lots of customers
+
+network disintermediation 
+hybrid partly p2p - centralized
+
+webrtc - p2p
+scuttlebutt, torrent experiment
+
+old mistakes: circuitswitch vs packet
+
+
+
