@@ -13,180 +13,60 @@ The node community is one of the best places of innovation and we can help kicki
 
 # Hunting performance problems - Daniel Khan
 
-When node gets bad press it's usually around performance (netflix vs. express or the walmart memory leak).
-
-* so what's node? V8, libuv, std library, bindings ...
-
-## node.js memory model
-* resident set size = heap + stack + code
-* `process.memoryUsage()`
-
-## garbage collection
-* scavenge compact - quick, dirty
-* mark sweep - proper one
-* `node-gc-profiler`
-
-## heap snapshots
-* when you get process out of memory - probably a leak
-* simple leak - obvious
-* complex leak - closure holding onto whole context, even unused vars
-* use `v8-profiler` to take a heap snapshot
-* use chrome devtool compare heap snapshot
-
-## node.js vs cpu
-* main thread -> event loop -> thread pool
-* blocking main thread is not fun
-* `v8-profiler`, `startProfiling`, `endProfiling`
-* chrome devtool - cpu profiles
-* generate flamegraphs
-
-## tips
-* set `NODE_ENV`, otherwise defaults to development might cause some modules do weird shit
-* build your own dashboard using tools above
-* do load testing and measure/profile
+When node gets bad press it's usually around performance (netflix vs. express or the walmart memory leak). To tackle problems like this we first need to understand what node is, the memory model, how garbage collection works. Heap snapshots are great at tracking down memory leaks. CPU profiles and generating flamegraphs can help understanding CPU related issues. v8-profiler and Chrome Dev Tools are great for these.
 
 # the magic dump - Luca Maraschi
 
-* coredumps - process snapshots
-* node has a post-mortems wg and a tracing wg
-* check out indutny/llnode, node.js lldb debugger plugin
-> bryan cantrill - production is war
-* story of a production outage and debugging session:
-    * elb trashing machine - terminating instances, hard to debug
-    * stack: ec2 running nginx, node
-    * taking a dump on linux, move it to smartos - to dtrace and mdb
-    * restify + bunyan - implements dtrace probes
-    * `prstat` for nice process stats
-    * `bunyan -p <PID>` - enable logging w/o restart
-    * `joyent/nhttpsnoop`
-    * node flag  `--abort-on-uncaught-exception`
-    * `pmap -x`, `gcore`
-    * `mdb findleaks` - if you're lucky
-*   * shown lots of other mdb command
-    * in the end it was a typo causing self referencing handler
+Luca told us a story of a production outage and tracking down the root cause. Lots of good examples on how to debug issues by taking a core dump and analyzing with dtrace and mdb on SmartOS. In the end he found the typo causing a memory leak.
 
-# middleware evolution - Eugene Pshenichniy
+# Middleware evolution - Eugene Pshenichniy
 
-* slides had cool builtin realtim polls
-* poll: people love promises
-* poll: people love restify
-* 'middleware' - series of functions connected together like unix pipes
-* implementing 'middlewares':
-    * callbacks - hell,
-    * generators - not intuitive (poll: what?!)
-* co - turn generators into promises
-* when implemented with async-await
-    * return promise
-    * only with babel of course
-    * poll people like it
+Eugenes slides had really cool realtime polls built-in providing great input from the audience. Based on the people seem to like restify for building APIs, agree that generators are not really intuitive but prefer promises and like async-await.
 
 # robots - Julian Cheal
 
-* libraries: cylons.js johnnyfive or gobot (for go)
-* hello world - blinking led
-* devices:
-    * RGB LED
-    * RGB LED strip
-    * arduino
-    * digispark
-    * raspi
-    * photon
-    * an iBeacon
-    * parrot drone
+Julien demoed all sorts of hardware from RGB LED strips to dancing Parrot AR drones. I counted most laughs per talk here. I guess he could easily be a standup comedian. Libraries tp check out include cylons.js johnnyfive or gobot (for go).
 
 # Becoming a better node dev - Igor Soarez
 
-## motivation
-* short term: necessity, fun
-* grow fond of it, bet on the long run
+You might started learning node for just fun or out of necessity but to keep up your motivation it's great to bet on the long run and enjoy taking it further.
 
-## attitude
+Igor mentioning the right mentality to keep things simple (YAGNI, no IDEs, no boilerplate, no code generation) reminded me of a great talk from Rich Hickey: Simple made easy.
 
-## mentality
-* simplicty, YAGNI, no IDEs, no boilerplate, no code generation, etc
-* reminds me easy vs simple
+Also node has the perfect tools for 'turbo mode' learning by keeping your feedback keep really short. Anyone running tests with nodemon and growl? :)
 
-## learning
-* turbo mode: short feedback loop
-* invest in tools but don't overoptimize
+An absolute necessity of course is having great JS skills but it's also great idea to become a T-shaped generalizing specialist and know things like frontend and a bit of ops.
 
-## great node skills
-* basic js
-* network protocols
-* T-shaped
+We can map certain node skills to levels of capable, efficient and pro developer. An interesting idea here was README-driven development at a quite high level of maturity. Essentially breaking a problem down to small node modules in advance then writing READMEs, then tests, then code.
 
-## levels
+Encouraging to publish your code early. Great community, calling mentors, too. teaching, pairing rocks
 
-* capable: modules, troubelshooting, debugging, no cb hell, use streams
-* efficient: advanced flow control, understand event loop, IO throttling, work queues, custom streams
-* pro: understand libuv, v8, custom TCP protocols, README driven development, small modules, README-tests-code
+# Greenkeeper demo - Stephan Bönnemann
 
-## community
-* standards, conventions
-* contributing to open source
-* publish your code early
-* teach
+Then we saw a short demo of greenkeeper. This tools sends you PRs when dependencies release a new version, triggering a CI run and thus also allowing to automatically detect non semver-respecting dependencies breaking our own code.
+* NODECONFBCN free for a month for private repos - ask Stephan if it's public?
 
-## pairing
+# Rapid idea devalidation - David Gruebl
 
-# Greenkeeper demon - Stephan Bönnemann
+We all know the feeling when a friend approaches with that amazing idea. A startup is a bet on an idea, validate ASAP.
 
-* automatic break-detection for non-semver respecting deps`
-* NODECONFBCN free for a month for private repos
+# Coding education should be free - Michelle and Claire
 
-# rapid idea devalidation - David Gruebl
+Community is everything. Online resources are cool but pretty hard to stay motivated for the whole length of a course. Community learning is so much better. We have the odd situation when learning to code is expensive and at the same time there's a huge skill shortage. Also more diversity is great for the industry.
 
-* we are 'that friend' - to implement that starup idea
-* a startup is a bet on an idea, validate ASAP
+Nodeschool events are ...
+Founders and coders is an 8 week coding course with volunteers. Guardian article comments... Free doesn't mean no quality though. And of course you can't learn everything in that timerframe but it can be a great start.
+mentor, start new event, contribute, be cool
 
-# coding education should be free - Michelle and Claire
+# Async microservices with node - Bruno Pedro
 
-* community is everything
-* online resources are cool but community learning better
-* skill shortage but learning to code is $$$
-* diversity is better for the industry
+The de-facto standard way of 'connecting' microservices is using HTTP. A message broker based approach might make this more decoupled and simpler in some cases.
 
-## nodegirls_LDN
-
-## online resources
-
-* nodeschool, freecodecamp
-* hard to stay motivated alone
-
-## founders and coders
-* 8 weeks of group learning with volunteer teachers
-
-## critics
-* free !== bad
-* resentment towards newcomers
-* you can't learn everything in a day, but introduction is possible
-
-## mentor, start new event, contribute, be cool
-
-# async microservices with node - Bruno Pedro
-
-## microservices
-* organize service around business capabilities
-* designed for resilience and decentralized ownership and deployment
-* loosely coupled, limited responsibility
-
-* connected through common interface, usually HTTP
-* can also use a broker to decouple even more and simplify
-
-## AMQP
-* advanced pub-sub, transactional
-* publish: fire-and-forget, or confirmed
-* configurable routing and subscribe
-* can even consume via web-hook (rabbit plugin)
-
-## amqplib
-
-## patterns
-work queue, pubsub, webhook, routing, backpressure, RPC
+AMQP (and RabbitMQ) is a great option offering lots of flexibility in the patterns used. To simplify things message consumption can actually happen via web-hooks as well using a RabbitMQ plugin. Bruno referred to amqplib as a great node module. Can't agree more. Also check out rascal
 
 # networking for node programmers - Aria Stewart
 
-* brief history on the begginings of networking
+Aria brief history on the begginings of networking
 
 ## Ethernet
 * 1980s local networks converged to Ethernet
