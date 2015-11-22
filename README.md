@@ -1,95 +1,20 @@
 # V8 under the hood - Franziska Hinkelman
 
-## JS engines everywhere
+Enough to look at SunSpider benchmarks over the past few years to see how far we got with JS engines. We got a peek into how V8 optimizes JS and what kind of optimizations we can apply to application code if we really need them. A great example was how hidden classes allow machine code re-use. Check out `d8` to get more V8 insights about your JS code.
 
-* mozilla - Spidermonkey
-* microsoft - Chakra
-* apple - JavascriptCore
-* oracle - Nashorn (ex-Rhino)
-* google - V8
+# Lessons learned from building a high traffic web-app  - Patrick Hund
 
-## and they're fast
+Mobile.de (part of eBay) has moved their homepage serving 300 requests a second to node from Java making coding a lot of fun again in the process. Lessons included the importance of getting to production early, lots of pair programming and keeping it simple. Also a great war story on last minute replacing a misbehaving node module based on load testing. **People, load test!**
 
-* see sunspider benchmarks - getting ever faster
-* JS not that much slower than optimized c++ code (and faster than unoptimized)
+# IPFS and the distributed web - David Dias
 
-## compilers
+The web relies on our network backbones and centralized services way too much. Loosing your connection or a DDoS attack can seriously affect us all. It doesn't have to be that way but how do you serve data to everywhere? Just serve it **from everywhere**. Protocol Labs is working on IPFS to upgrade the web using peer to peer technology built on Merkle DAGs (like git), DHTs (like BitTorrent) and much more.
+The node community is one of the best places of innovation and we can help kicking off the distributed web revolution, too. Check out IPFS.
 
-* lex -> parse -> translate -> compile
-* AOT (ahead of time, e.g C++) vs JIT (just in time, JS)
+# Hunting performance problems - Daniel Khan
 
-## V8
+When node gets bad press it's usually around performance (netflix vs. express or the walmart memory leak).
 
-* V8 uses two compilers: a quick JIT and optimizing JIT compiler
-* hot functions are identified then passed to the optimizing compiler
-* optimizing compiler spends a bit more but does more optimizations
-* V8 optimizing compilers:
-    * 2011 CrankShaft
-    * 2015 TurboFan - work in progress
-* `d8` - debug V8
-* `d8 --trace-opt` - tracing optimizations
-
-## optimizations
-
-* V8 creteas hidden classes to re-use already compiled machine
-* `d8 --allow-natives-syntax` - `#HaveSameMap(a,b) === true` if same hidden class
-* inline caches - for property access: same hidden class, property at same memory offset
-* dead code elimination
-* V8 loves constructors and monomorphic functions (same number+type arguments)
-* avoid try-catch, for-in, leaking vars, with, eval (seriously?)
-* optimize with caution, clearer code first
-
-# Lessons learned from building high traffic web-app  - Patrick Hund
-* mobile.de 300 req/sec
-* moving away from Java, breaking the monolith
-* importance load testing, good monitoring (gatling, grafana)
-* the joy of working with node for devs
-* lessons learnt:
-    * run in prod as early as possible
-    * write testable code
-    * code reviews are silver pairing is gold (harder but pays off)
-    * keep it simple
-
-# IPFS - David Dias
-
-* node is one of the best places of innovation - community, etc
-
-## problems
-
-* web relies on connection to the backbone
-* loosing connection, ddos
-* location addressing (instead of content addressing)
-* irresponsible bandwith usage:  sharing 200MB video - 8 hops, 30 clients, 48GB - ? surely networking stack optimizes something
-* we're building more datacenter cables put data closer to user
-* internet connection speeds still increasing faster than bndwith requirements but for how long?
-* on slow connections inaccesible https sites: TLS handshake timeout
-* third world countries
-* offline collaboration in the same room?
-
-## goals?
-
-* apps with no origin
-* leveraging network cache
-* resilient to network partitions/splits
-* internet - comes from intergalactic network, right?
-
-## solution
-
-distributed|merkle|permanent web
-
-* merkledag - link of blobs, each blob starts with the hash of the previous one
-
-> Money does grow on trees. It's called bitcoin.
-
-* DHT - holy grail of p2p - discovery of peers, content locations
-
-## serve data to everywhere?  - serve data from everywhere
-
-# Hunting Performance Problems - Daniel Khan
-
-* bad press - usually around perf
-    * netflix - node in flames
-    * walmart - node memory leak
 * so what's node? V8, libuv, std library, bindings ...
 
 ## node.js memory model
