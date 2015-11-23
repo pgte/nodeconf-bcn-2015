@@ -66,57 +66,6 @@ AMQP (and RabbitMQ) is a great option offering lots of flexibility in the patter
 
 # networking for node programmers - Aria Stewart
 
-Aria brief history on the begginings of networking
+As node developers we have to be aware of the properties and architecture of the networking protocol stack our apps communicate through. After some history Aria covered the basics of the most important network protocols from all layers: Ethernet, ARP, IP, DNS, TCP. These are nothing new but stood the test of time and important to understand them.
 
-## Ethernet
-* 1980s local networks converged to Ethernet
-* OSI model, layer 2 ethernet (layer 3 ip)
-
-## ARP
-* layer 2-3 link - Ethernet - IP
-* who has this ip? then caches
-* if not local IP to talk to then gateway
-
-## IP
-* address for a single interface
-* getting packets across networks, just reading a few bytes of the beginning of packet
-* 4 bytes, network part, host id, A, B, C, D, etc class, /16 /24
-* e.g. /24 network: 5.6.7 host: .1
-* local network - usually not too many routes
-* on the internet: broad routes to send traffic to EU, US, etc
-
-## IPv6
-* starting to happen
-* 128 bit, 64 bit for host and network, each
-* routing bit more complex though
-
-## traceroute
-* e.g. `traceroute -an 24.75.24.253`
-* backbone routers don't always increment hop count
-* also don't always advertise who they are
-
-## DNS
-
-## TCP
-* connection is defined by 2 IPs, 2 ports
-* source port usually chosen randomly
-* each conn tracks how much buffer space left to send
-* drop packets are rarer these dates, but delayed is common
-* TCP connection setup kind of slow
-
-## new constraints: mobile phones
-* high bandwidth but delay
-
-## convergence
-* IPv6 starting to happen
-
-## unevenly distributed future
-* e.g. 2G connection speeds common in India
-
-## network scale limits
-* no more ipv4 addresses
-* ISP doing NAT, same IP for lots of customers
-
-# network disintermediation
-* hybrid p2p - centralized
-* webRTC, scuttlebutt, torrent experiments
+On some more recent new IPv6 is finally really starting to happen and we could hear a bit about p2p once again, check out some of the torrent experiments from mafintosh and scuttlebutt from dominictarr.
