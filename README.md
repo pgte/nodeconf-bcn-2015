@@ -63,7 +63,7 @@ Free doesn't mean low quality though. Passionate volunteers are helping out. 8 w
 
 The de-facto standard way of 'connecting' microservices is using HTTP. A message broker based approach might make this more decoupled and simpler in some cases.
 
-AMQP (and RabbitMQ) is a great option offering lots of flexibility in the patterns used. To simplify things message consumption can actually happen via web-hooks as well using a RabbitMQ plugin. Bruno recommends amqplib as a great node module. Can't agree more. Also check out rascal.
+AMQP (and RabbitMQ) is a great option offering lots of flexibility in the patterns used. To simplify things message consumption can actually happen via web-hooks as well using a RabbitMQ plugin. Bruno recommends amqplib as a great node module. Can't agree more. Also check out [rascal](https://github.com/guidesmiths/rascal#readme).
 
 ## Networking for node programmers - Aria Stewart
 
