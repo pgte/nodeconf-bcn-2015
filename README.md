@@ -71,4 +71,7 @@ As node developers we have to be aware of the properties and architecture of the
 
 On some more recent new IPv6 is finally really starting to happen and we could hear a bit about p2p once again. Be sure to check out some of the torrent experiments from mafintosh and scuttlebutt from dominictarr.
 
-## performance workshop - Tom, Hassy and Igor
+## Advanced performance workshop - Tom, Hassy and Igor
+
+A great hands-on workshop with a series of challenges.
+//TODO
