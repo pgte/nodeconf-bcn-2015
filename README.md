@@ -1,3 +1,5 @@
+//TODO intro
+
 # V8 under the hood - Franziska Hinkelman
 
 Enough to look at SunSpider benchmarks over the past few years to see how far we got with JS engines. We got a peek into how V8 works and what kind of optimizations we can apply to application code if we really need them. A great example was how hidden classes allow machine code re-use. Check out `d8` to get more V8 insights about your JS code.
