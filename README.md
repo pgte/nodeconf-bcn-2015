@@ -2,6 +2,8 @@
 
 Written by Csaba Palfi
 
+//TODO photos + links + some more details about the workshop
+
 21st November 2015 marked the Barcelona edition of the longest running community-driven Node.js conference. As part of the conference - the day after - Tom Gallacher, Hassy Veldstra and Igor Soarez from YLD delivered a hand-on Node.js Performance workshop. Let's dive in with a short summary of the talks:
 
 ## V8 under the hood - Franziska Hinkelman
@@ -20,7 +22,7 @@ The web relies on our network backbones and centralized services way too much. L
 
 When node gets bad press it's usually around performance (Netflix vs. express or the Walmart memory leak). To tackle problems like this we first need to understand what node is, the memory model, how garbage collection works and so on. Then we can troubleshoot memory leaks with heap snapshots and CPU-related problems with flamegraphs. v8-profiler and Chrome Dev Tools makes this fairly easy.
 
-## the magic dump - Luca Maraschi
+## The magic dump - Luca Maraschi
 
 Luca told us a story of a production outage and tracking down the root cause. Lots of good examples on how to debug issues by taking a core dump and using dtrace and mdb on SmartOS.
 
@@ -28,7 +30,7 @@ Luca told us a story of a production outage and tracking down the root cause. Lo
 
 Eugenes' slides had really cool realtime polls built-in giving input from the audience. Based on the polls people agree that generators are not really intuitive but prefer promises and async-await seems well received, too
 
-## robots - Julian Cheal
+## Robots - Julian Cheal
 
 Julien demoed all sorts of hardware from RGB LED strips to a dancing Parrot AR drones. Clearly the most jokes/laughs per talk here. Libraries to check out include cylons.js and [johnny-five](https://www.npmjs.com/package/johnny-five).
 
@@ -63,8 +65,10 @@ The de-facto standard way of 'connecting' microservices is using HTTP. A message
 
 AMQP (and RabbitMQ) is a great option offering lots of flexibility in the patterns used. To simplify things message consumption can actually happen via web-hooks as well using a RabbitMQ plugin. Bruno recommends amqplib as a great node module. Can't agree more. Also check out rascal.
 
-## networking for node programmers - Aria Stewart
+## Networking for node programmers - Aria Stewart
 
 As node developers we have to be aware of the properties and architecture of the networking protocol stack our apps communicate through. After some history Aria covered the basics of the most important network protocols from all layers: Ethernet, ARP, IP, DNS, TCP. These are nothing new but stood the test of time and important to understand them.
 
 On some more recent new IPv6 is finally really starting to happen and we could hear a bit about p2p once again. Be sure to check out some of the torrent experiments from mafintosh and scuttlebutt from dominictarr.
+
+## performance workshop - Tom, Hassy and Igor
